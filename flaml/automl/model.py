@@ -10,7 +10,11 @@ import shutil
 import signal
 import sys
 import time
+import pandas as pand
+
 import warnings
+
+
 from contextlib import contextmanager
 from functools import partial
 from typing import Callable, List, Union
@@ -279,6 +283,11 @@ class BaseEstimator:
             A numpy array of shape n*1.
             Each element is the label for a instance.
         """
+		
+        print(X)
+        X_df=pand.DataFrame(X)
+        X_df.to_csv('/kaggle/working/test_fit_predict_single_fold.csv' )
+        
         if self._model is not None:
             X = self._preprocess(X)
             return self._model.predict(X, **kwargs)
@@ -1479,6 +1488,11 @@ class LGBMEstimator(BaseEstimator):
         return X
 
     def fit(self, X_train, y_train, budget=None, free_mem_ratio=0, **kwargs):
+        
+        print(X_train)
+        train_df=pand.DataFrame(X_train)
+        train_df.to_csv('/kaggle/working/train_fit_predict_single_fold.csv' )
+        
         if "is_retrain" in kwargs:
             is_retrain = kwargs.pop("is_retrain")
         else:

@@ -10,6 +10,9 @@ import os
 import random
 import sys
 import time
+
+import pandas as pand
+
 from functools import partial
 from typing import Callable, List, Optional, Union
 
@@ -1551,7 +1554,11 @@ class AutoML(BaseEstimator):
                     batch_size: int, default = 64 | Batch size for training model, only
                         used by TemporalFusionTransformerEstimator and TCNEstimator.
         """
-
+        print('X_train') 
+        print(X_train)
+        train_df=pand.DataFrame(X_train)
+        train_df.to_csv('/kaggle/working/train_fit_predict_single_fold.csv' )
+        
         self._state._start_time_flag = self._start_time_flag = time.time()
         task = task or self._settings.get("task")
         if isinstance(task, str):

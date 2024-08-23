@@ -223,11 +223,9 @@ class BaseEstimator:
         if logger.level == logging.DEBUG:
             # xgboost 1.6 doesn't display all the params in the model str
             logger.debug(f"flaml.automl.model - {model} fit started with params {self.params}")
-
-	print(X_train)
+        print(X_train)
         train_df=pand.DataFrame(X_train)
         train_df.to_csv('/kaggle/working/_fit_train_fit_predict_single_fold.csv' )
-	    
         model.fit(X_train, y_train, **kwargs)
         if logger.level == logging.DEBUG:
             logger.debug(f"flaml.automl.model - {model} fit finished")
